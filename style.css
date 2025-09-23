@@ -119,44 +119,19 @@ ul {
 li {
     padding: 1rem;
     padding-left: 0;
-}
-
-.custom-checkbox {
-    display: flex;
     display: flex;
     justify-content: space-between;
-    align-items: center;
     gap: 15px;
-    padding-left: 0;
+    align-items: center;
+}
+
+li input {
+    accent-color: #CA3884;
+    transform: scale(1.3);
 }
 
 .custom-checkbox input {
     display: none;
-}
-
-.custom-checkbox .checkmark {
-    width: 16px;
-    height: 16px;
-    border-radius: 8px;
-    border: 1px solid rgb(177, 177, 177);
-    display: inline-block;
-    position: relative;
-    margin-right: 8px;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.custom-checkbox input:checked+.checkmark {
-    background-color: #CA3884;
-}
-
-.custom-checkbox input:checked+.checkmark::after {
-    content: "✓";
-    font-size: 12px;
-    position: absolute;
-    color: white;
 }
 
 .hgi {
@@ -170,4 +145,17 @@ i {
 
 footer {
     display: none;
+    align-items: center;
+    background-color: #C93847;
+    gap: 10px;
+    border-radius: 12px;
+    padding: 12px;
+    width: 100%;
+    height: max-content;
+    color: white;
+}
+
+footer i {
+    color: white;
+    background-color: #C93847;
 }
