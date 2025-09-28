@@ -8,6 +8,29 @@
     font-family: "Inter", sans-serif;
 }
 
+/* largura e altura do scroll */
+::-webkit-scrollbar {
+  width: 8px;      /* largura vertical */
+  height: 8px;     /* altura horizontal */
+}
+
+/* trilho (fundo do scroll) */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+/* polegar (barra que você arrasta) */
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* polegar ao passar o mouse */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
 main {
     width: max-content;
     height: max-content;
@@ -15,6 +38,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 40px;
+    position: relative;
 }
 
 header {
@@ -114,6 +138,9 @@ form {
 ul {
     list-style: none;
     text-align: center;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: 50vh;
 }
 
 li {
@@ -144,18 +171,42 @@ i {
 }
 
 footer {
-    display: none;
     align-items: center;
-    background-color: #C93847;
     gap: 10px;
     border-radius: 12px;
     padding: 12px;
-    width: 100%;
-    height: max-content;
+    min-height: 40px;
     color: white;
+    text-align: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: 2s ease;
+    margin: 0 auto;
+    margin-bottom: 10px;
+
+    position: fixed;
+    bottom: 20px;
+    width: 60%;
+    max-width: 627px;
 }
 
-footer i {
-    color: white;
+.transitionError {
+    opacity: 1;
+    visibility: visible;
+    transition: 1s ease;
     background-color: #C93847;
 }
+
+.transitionSuccess {
+    opacity: 1;
+    visibility: visible;
+    transition: 1s ease;
+    background-color: #1cbd52d7;
+}
+
+.transparent {
+    background-color: white;
+}
+
+
+
