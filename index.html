@@ -13,7 +13,8 @@
         href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.hugeicons.com/font/hgi-stroke-rounded.css" />
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
 
 
@@ -56,12 +57,28 @@
 
         </form>
         <ul alt="Lista de compras">
-            
+
         </ul>
 
         <footer>
-            <i class="bi bi-exclamation-circle-fill"></i>
-            Digite ao menos um produto!
+            <p class="invalid-item" id="invalid-item"> <i class="bi bi-exclamation-circle-fill"></i>
+
+                Digite ao menos um produto!
+
+            </p>
+            <p class="trash-item" id="trash-item"> <i class="bi bi-exclamation-circle-fill"></i>
+
+                Selecione ao menos um produto!
+
+            </p>
+            <p class="success-item" id="success-item"> <i class="bi bi-exclamation-circle-fill"></i>
+
+                Item adicionado com sucesso!
+            </p>
+            <p class="took-item" id="took-item"> <i class="bi bi-exclamation-circle-fill"></i>
+
+                Item removido com sucesso!
+            </p>
         </footer>
 
     </main>

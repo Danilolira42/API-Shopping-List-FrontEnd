@@ -50,9 +50,13 @@ button {
     align-items: center;
     gap: 5px;
     text-decoration: none;
-    color: #CA3884;
+    color: #8a104f4d;
     font-weight: 500;
     margin-bottom: 15px;
+}
+
+button.submit:hover {
+    background-color: #9b2d6a;
 }
 
 @media (min-width: 1200px) {
@@ -139,23 +143,51 @@ li input {
     margin-left: auto;
 }
 
-i {
+p i {
     font-size: 20px;
 }
 
-footer {
-    display: none;
+.invalid-item,
+.trash-item {
     align-items: center;
-    background-color: #C93847;
     gap: 10px;
     border-radius: 12px;
-    padding: 12px;
+    padding: 8px;
     width: 100%;
     height: max-content;
     color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s ease;
 }
 
-footer i {
+p i {
     color: white;
+}
+
+.failed {
+    opacity: 1;
+    visibility: visible;
     background-color: #C93847;
+}
+
+.success-item,
+.took-item {
+    align-items: center;
+    gap: 10px;
+    border-radius: 12px;
+    padding: 8px;
+    width: 100%;
+    height: max-content;
+    color: white;
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s ease;
+}
+
+.success {
+    opacity: 1;
+    visibility: visible;
+    background-color: #1ac770;
+    transition: 1s ease;
 }
