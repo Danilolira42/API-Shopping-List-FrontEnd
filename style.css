@@ -129,6 +129,10 @@ button {
     justify-content: center;
 }
 
+.submit:hover {
+    background-color: #ca076cbd;
+}
+
 form {
     display: flex;
     gap: 16px;
@@ -180,14 +184,33 @@ footer {
     text-align: center;
     opacity: 0;
     visibility: hidden;
-    transition: 2s ease;
+    transition: 1s ease;
     margin: 0 auto;
     margin-bottom: 10px;
-
+    
     position: fixed;
     bottom: 20px;
-    width: 60%;
-    max-width: 627px;
+}
+
+/* Smartphones */
+@media (max-width: 767px) {
+  footer {
+    width: 376px;
+  }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+  footer {
+    width: 627px;
+  }
+}
+
+/* Notebooks e PCs */
+@media (min-width: 1024px) {
+  footer {
+    width: 627px;
+  }
 }
 
 .transitionError {
@@ -205,7 +228,8 @@ footer {
 }
 
 .transparent {
-    background-color: white;
+    filter: blur();
+    opacity: 0.2;
 }
 
 

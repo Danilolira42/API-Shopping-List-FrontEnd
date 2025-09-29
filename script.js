@@ -2,6 +2,7 @@ const form = document.querySelector("form");
 const list = document.querySelector("ul");
 const input = document.getElementById("input");
 const newText = document.createElement("p");
+let listObjects = [];
 
 form.onsubmit = (event) => {
     event.preventDefault();
@@ -35,7 +36,7 @@ form.onsubmit = (event) => {
         const newInput = document.createElement("input");
         const newIcon = document.createElement("i");
 
-        /* Reges para deixar a primeira linha maiúscula!*/
+        /* Regex para deixar a primeira linha maiúscula!*/
 
         const regex = /\D+/g;
         const replace = input.value.match(regex);
@@ -53,8 +54,27 @@ form.onsubmit = (event) => {
         newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
         newItem.appendChild(newIcon);
 
-        list.appendChild(newItem);
+        listObjects.push(newItem);
+        let listHeight = listObjects.length - 1;
+        
+        for(let i = 0; i < listObjects.length; i++){
+            if(listObjects[i].textContent == newItem.textContent){
+                try {
+                    
+                    list.appendChild(newItem);
+                    
+                } catch (error) {
+                    const footer = document.querySelector("footer");
+                    const newText = "Este item já existe!";
 
+                    footer.appendChild(newText);
+                    footer.classList.add("transitionError");
+
+                    footer.style.display = "flex";
+                }
+            }
+        }
+        
         const footer = document.querySelector("footer");
 
         newText.textContent = "Item adicionado com sucesso!";
@@ -65,22 +85,20 @@ form.onsubmit = (event) => {
 
         footer.classList.add("transitionSuccess");
 
+        if (listHeight >= 2) {
+            let transition = listObjects[listHeight];
+            transition.classList.add("transparent");
+
+            setTimeout(() => {
+                footer.classList.remove("transitionSuccess");
+                transition.classList.remove("transparent");
+            }, 1000);
+        }
         setTimeout(() => {
             footer.classList.remove("transitionSuccess");
         }, 2000);
 
         input.value = "";
-
-        let listObjects = [];
-
-        listObjects.push(newItem);
-
-        for (let i = 0; i < listObjects.length; i++) {
-
-            console.log(listObjects[i])
-        }
-
-        console.log(listObjects)
 
         newIcon.onclick = () => {
 
