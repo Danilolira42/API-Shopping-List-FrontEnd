@@ -2,7 +2,25 @@ const form = document.querySelector("form");
 const list = document.querySelector("ul");
 const input = document.getElementById("input");
 const newText = document.createElement("p");
+let currencyValue = "";
 let listObjects = [];
+let newListItem = [];
+
+function Objects(listObjects) {
+
+    const object = listObjects.map(item => item.textContent);
+    const validate = object.includes(currencyValue);
+
+    Validate(object);
+    return validate;
+}
+
+function Validate(object) {
+
+    if (object.includes(currencyValue)) {
+        return object.includes(currencyValue);
+    }
+}
 
 form.onsubmit = (event) => {
     event.preventDefault();
@@ -54,94 +72,116 @@ form.onsubmit = (event) => {
         newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
         newItem.appendChild(newIcon);
 
-        listObjects.push(newItem);
-        let listHeight = listObjects.length - 1;
-        
-        for(let i = 0; i < listObjects.length; i++){
-            if(listObjects[i].textContent == newItem.textContent){
-                try {
-                    
-                    list.appendChild(newItem);
-                    
-                } catch (error) {
-                    const footer = document.querySelector("footer");
-                    const newText = "Este item já existe!";
+        currencyValue = newString;
+        console.log(currencyValue);
 
-                    footer.appendChild(newText);
-                    footer.classList.add("transitionError");
+        const validate = Objects(listObjects);
 
-                    footer.style.display = "flex";
-                }
-            }
-        }
-        
-        const footer = document.querySelector("footer");
+        if (validate) {
+            
+            const footer = document.querySelector("footer");
 
-        newText.textContent = "Item adicionado com sucesso!";
-        newText.style.margin = 0;
+            newText.textContent = "Este item já existe na lista!";
+            newText.style.margin = 0;
 
-        footer.appendChild(newText);
-        footer.style.display = "flex";
+            footer.appendChild(newText);
 
-        footer.classList.add("transitionSuccess");
-
-        if (listHeight >= 2) {
-            let transition = listObjects[listHeight];
-            transition.classList.add("transparent");
+            footer.classList.add("transitionError");
 
             setTimeout(() => {
-                footer.classList.remove("transitionSuccess");
-                transition.classList.remove("transparent");
-            }, 1000);
-        }
-        setTimeout(() => {
-            footer.classList.remove("transitionSuccess");
-        }, 2000);
 
-        input.value = "";
+                footer.classList.remove("transitionError");
 
-        newIcon.onclick = () => {
+            }, 2000);
 
-            if (newInput.checked == false) {
+            footer.style.display = "flex";
 
-                const footer = document.querySelector("footer");
+            return;
 
-                newText.textContent = "Selecione ao menos um item!";
-                newText.style.margin = 0;
+        } else {
 
-                footer.appendChild(newText);
+            listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
+            let listHeight = listObjects.length - 1;
 
-                footer.classList.add("transitionError");
+            list.appendChild(newItem); //Adiciona o novo elemento a lista.
 
-                setTimeout(() => {
+            const footer = document.querySelector("footer");
 
-                    footer.classList.remove("transitionError");
+            newText.textContent = "Item adicionado com sucesso!";
+            newText.style.margin = 0;
 
-                }, 2000);
+            footer.appendChild(newText);
+            footer.style.display = "flex";
 
-                footer.style.display = "flex";
+            footer.classList.add("transitionSuccess");
 
-            } else {
-
-                const footer = document.querySelector("footer");
-
-                newText.textContent = "Item removido com sucesso!";
-                newText.style.margin = 0;
-
-                footer.appendChild(newText);
-
-                newItem.classList.add("transparent");
-
-                footer.classList.add("transitionSuccess");
+            if (listHeight >= 2) {
+                let transition = listObjects[listHeight];
+                transition.classList.add("transparent");
 
                 setTimeout(() => {
                     footer.classList.remove("transitionSuccess");
-                    newItem.classList.remove("transparent");
-                }, 2000);
+                    transition.classList.remove("transparent");
+                }, 1000);
+            }
+            setTimeout(() => {
+                footer.classList.remove("transitionSuccess");
+            }, 2000);
 
-                footer.style.display = "flex";
+            input.value = "";
 
-                newItem.remove()
+            newIcon.onclick = () => {
+
+                if (newInput.checked == false) {
+
+                    const footer = document.querySelector("footer");
+
+                    newText.textContent = "Selecione ao menos um item!";
+                    newText.style.margin = 0;
+
+                    footer.appendChild(newText);
+
+                    footer.classList.add("transitionError");
+
+                    setTimeout(() => {
+
+                        footer.classList.remove("transitionError");
+
+                    }, 2000);
+
+                    footer.style.display = "flex";
+
+                } else {
+
+                    const footer = document.querySelector("footer");
+
+                    newText.textContent = "Item removido com sucesso!";
+                    newText.style.margin = 0;
+
+                    footer.appendChild(newText);
+
+                    newItem.classList.add("transparent");
+
+                    footer.classList.add("transitionSuccess");
+
+                    setTimeout(() => {
+                        footer.classList.remove("transitionSuccess");
+                        newItem.classList.remove("transparent");
+                    }, 2000);
+
+                    if (listHeight >= 2) {
+                        let transition = listObjects[listHeight];
+                        transition.classList.add("transparent");
+
+                        setTimeout(() => {
+                            footer.classList.remove("transitionSuccess");
+                            transition.classList.remove("transparent");
+                        }, 1000);
+                    }
+
+                    footer.style.display = "flex";
+                    newItem.remove()
+                }
             }
         }
     }
