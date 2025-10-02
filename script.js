@@ -53,7 +53,7 @@ form.onsubmit = (event) => {
         const newInput = document.createElement("input");
         const newIcon = document.createElement("i");
 
-        /* Regex para deixar a primeira linha maiúscula!*/
+        /* Regex para deixar a primeira letra maiúscula*/
 
         const regex = /\D+/g;
         const replace = input.value.match(regex);
@@ -167,6 +167,14 @@ form.onsubmit = (event) => {
                         footer.classList.remove("transitionSuccess");
                         newItem.classList.remove("transparent");
                     }, 2000);
+
+                    const index = listObjects.indexOf(newItem);
+
+                    if(index > -1){
+                        listObjects.splice(index, 1);
+                    }
+
+                    let listHeight = listObjects.length - 1; 
 
                     if (listHeight >= 2) {
                         let transition = listObjects[listHeight];
