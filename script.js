@@ -63,21 +63,29 @@ form.onsubmit = (event) => {
         const newString = changes.replace(changes.charAt(0), upperCharacter);
 
         newInput.type = "checkbox";
-        newItem.appendChild(newInput);
 
-        newLabel.textContent = newString;
+        newInput.textContent = newString;
+
+        newLabel.appendChild(newInput)
+
+        newLabel.appendChild(document.createTextNode(newString))
+        newLabel.style.display = "flex";
+        newLabel.style.gap = "10px";
+        newLabel.style.alignItems = "center";
+
         newItem.appendChild(newLabel);
+
+        console.log(newItem);
 
         newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
         newItem.appendChild(newIcon);
 
         currencyValue = newString;
-        console.log(currencyValue);
 
         const validate = Objects(listObjects);
 
         if (validate) {
-            
+
             const footer = document.querySelector("footer");
 
             newText.textContent = "Este item já existe na lista!";
@@ -170,11 +178,11 @@ form.onsubmit = (event) => {
 
                     const index = listObjects.indexOf(newItem);
 
-                    if(index > -1){
+                    if (index > -1) {
                         listObjects.splice(index, 1);
                     }
 
-                    let listHeight = listObjects.length - 1; 
+                    let listHeight = listObjects.length - 1;
 
                     if (listHeight >= 2) {
                         let transition = listObjects[listHeight];

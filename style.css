@@ -10,25 +10,27 @@
 
 /* largura e altura do scroll */
 ::-webkit-scrollbar {
-  width: 8px;      /* largura vertical */
-  height: 8px;     /* altura horizontal */
+    width: 8px;
+    /* largura vertical */
+    height: 8px;
+    /* altura horizontal */
 }
 
 /* trilho (fundo do scroll) */
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
-  border-radius: 10px;
+    background: #f1f1f1;
+    border-radius: 10px;
 }
 
 /* polegar (barra que você arrasta) */
 ::-webkit-scrollbar-thumb {
-  background: #888;
-  border-radius: 10px;
+    background: #888;
+    border-radius: 10px;
 }
 
 /* polegar ao passar o mouse */
 ::-webkit-scrollbar-thumb:hover {
-  background: #555;
+    background: #555;
 }
 
 main {
@@ -161,6 +163,19 @@ li input {
     transform: scale(1.3);
 }
 
+#selectAll {
+    display: flex;
+    gap: 10px;
+    visibility: hidden;
+}
+
+.selectAll {
+    accent-color: #CA3884;
+    transform: scale(1.3);
+    display: flex;
+    margin-left: 20px;
+}
+
 .custom-checkbox input {
     display: none;
 }
@@ -187,30 +202,30 @@ footer {
     transition: 1s ease;
     margin: 0 auto;
     margin-bottom: 10px;
-    
+
     position: fixed;
     bottom: 20px;
 }
 
 /* Smartphones */
 @media (max-width: 767px) {
-  footer {
-    width: 376px;
-  }
+    footer {
+        width: 376px;
+    }
 }
 
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
-  footer {
-    width: 627px;
-  }
+    footer {
+        width: 627px;
+    }
 }
 
 /* Notebooks e PCs */
 @media (min-width: 1024px) {
-  footer {
-    width: 627px;
-  }
+    footer {
+        width: 627px;
+    }
 }
 
 .transitionError {
@@ -231,6 +246,3 @@ footer {
     filter: blur();
     opacity: 0.2;
 }
-
-
-
