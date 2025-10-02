@@ -4,7 +4,6 @@ const input = document.getElementById("input");
 const newText = document.createElement("p");
 let currencyValue = "";
 let listObjects = [];
-let newListItem = [];
 
 function Objects(listObjects) {
 
