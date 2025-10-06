@@ -221,7 +221,6 @@ p i {
     font-size: 20px;
 }
 
-<<<<<<< HEAD
 .invalid-item,
 .trash-item {
     align-items: center;
@@ -265,85 +264,4 @@ p i {
     visibility: visible;
     background-color: #1ac770;
     transition: 1s ease;
-=======
-footer {
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px;
-    padding: 12px;
-    min-height: 40px;
-    color: white;
-    text-align: center;
-    transition: 1s ease;
-    margin: 0 auto;
-    margin-bottom: 10px;
-    position: fixed;
-    bottom: 20px;
-}
-
-/* Smartphones */
-@media (max-width: 767px) {
-    footer {
-        width: 376px;
-    }
-}
-
-/* Tablets */
-@media (min-width: 768px) and (max-width: 1023px) {
-    footer {
-        width: 627px;
-    }
-}
-
-/* Notebooks e PCs */
-@media (min-width: 1024px) {
-    footer {
-        width: 627px;
-    }
-}
-
-.transitionError {
-    opacity: 1;
-    visibility: visible;
-    transition: 1s ease;
-    background-color: #C93847;
-    z-index: 1;
-    margin-bottom: 30px;
-}
-
-.transitionSuccess {
-    opacity: 1;
-    visibility: visible;
-    transition: 1s ease;
-    background-color: #1cbd52d7;
-    z-index: 1;
-    margin-bottom: 30px;
-}
-
-.transparent {
-    filter: blur(2px);
-    opacity: 0.2;
-}
-
-.copyright {
-    visibility: visible;
-    opacity: 1;
-    width: max-content;
-    align-content: center;
-    background-color: #CA3884;
-    margin: 0;
-    bottom: 0;
-    padding: 0;
-    border-radius: 0;
-    width: 100%;
-    z-index: 0;
-}
-
-.copyright p {
-    text-align: center;
-    margin: 0 auto;
-    color: white;
-    padding: 0;
-    margin: 0;
->>>>>>> 0c975e6dcb6ab8f4da7e19e1839dad184331c814
 }
