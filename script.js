@@ -63,19 +63,17 @@ form.onsubmit = (event) => {
         const newString = changes.replace(changes.charAt(0), upperCharacter);
 
         newInput.type = "checkbox";
-
-        newInput.textContent = newString;
+        newInput.style.cursor = "pointer";
 
         newLabel.appendChild(newInput)
 
-        newLabel.appendChild(document.createTextNode(newString))
+        newLabel.appendChild(document.createTextNode(newString));
         newLabel.style.display = "flex";
         newLabel.style.gap = "10px";
         newLabel.style.alignItems = "center";
+        newLabel.style.cursor = "pointer";
 
         newItem.appendChild(newLabel);
-
-        console.log(newItem);
 
         newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
         newItem.appendChild(newIcon);
@@ -85,7 +83,7 @@ form.onsubmit = (event) => {
         const validate = Objects(listObjects);
 
         if (validate) {
-
+            console.log(currencyValue)
             const footer = document.querySelector("footer");
 
             newText.textContent = "Este item já existe na lista!";
@@ -106,6 +104,11 @@ form.onsubmit = (event) => {
             return;
 
         } else {
+
+            const ul = document.querySelector("ul");
+
+            ul.classList.remove("empty");
+            ul.classList.add("contains");
 
             listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
             let listHeight = listObjects.length - 1;
@@ -180,6 +183,10 @@ form.onsubmit = (event) => {
 
                     if (index > -1) {
                         listObjects.splice(index, 1);
+                    }
+
+                    if (listObjects.length == 0) {
+                        ul.classList.add("empty");
                     }
 
                     let listHeight = listObjects.length - 1;

@@ -18,13 +18,13 @@
 
 /* trilho (fundo do scroll) */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+    background: #ffffff;
     border-radius: 10px;
 }
 
 /* polegar (barra que você arrasta) */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+    background: #CA3884;
     border-radius: 10px;
 }
 
@@ -35,12 +35,19 @@
 
 main {
     width: max-content;
-    height: max-content;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 40px;
-    position: relative;
+    gap: 30px;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
 }
 
 header {
@@ -142,16 +149,38 @@ form {
 }
 
 ul {
+    max-height: 300px;
     list-style: none;
     text-align: center;
     overflow-y: auto;
     overflow-x: hidden;
-    max-height: 50vh;
+}
+
+ul.contains {
+    border-radius: 5px;
+    border: 0.5px solid #dadada;
+    box-sizing: border-box;
+    box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.2);
+    visibility: visible;
+    transition: 1s ease;
+    opacity: 1;
+
+}
+
+ul.empty {
+    box-shadow: none;
+    border: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: 2s ease;
 }
 
 li {
-    padding: 1rem;
+    padding: 20px;
     padding-left: 0;
+    padding-top: 0px;
+    text-align: center;
+    margin: 0 auto;
     display: flex;
     justify-content: space-between;
     gap: 15px;
@@ -166,7 +195,6 @@ li input {
 #selectAll {
     display: flex;
     gap: 10px;
-    visibility: hidden;
 }
 
 .selectAll {
@@ -197,12 +225,9 @@ footer {
     min-height: 40px;
     color: white;
     text-align: center;
-    opacity: 0;
-    visibility: hidden;
     transition: 1s ease;
     margin: 0 auto;
     margin-bottom: 10px;
-
     position: fixed;
     bottom: 20px;
 }
@@ -233,6 +258,8 @@ footer {
     visibility: visible;
     transition: 1s ease;
     background-color: #C93847;
+    z-index: 1;
+    margin-bottom: 30px;
 }
 
 .transitionSuccess {
@@ -240,9 +267,33 @@ footer {
     visibility: visible;
     transition: 1s ease;
     background-color: #1cbd52d7;
+    z-index: 1;
+    margin-bottom: 30px;
 }
 
 .transparent {
-    filter: blur();
+    filter: blur(2px);
     opacity: 0.2;
+}
+
+.copyright {
+    visibility: visible;
+    opacity: 1;
+    width: max-content;
+    align-content: center;
+    background-color: #CA3884;
+    margin: 0;
+    bottom: 0;
+    padding: 0;
+    border-radius: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.copyright p {
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    padding: 0;
+    margin: 0;
 }
