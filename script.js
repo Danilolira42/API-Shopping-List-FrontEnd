@@ -22,92 +22,189 @@ function Validate(object) {
 }
 
 form.onsubmit = (event) => {
+    event.preventDefault();
 
-    event.preventDefault()
+    /*Validação de entrada de dados!*/
 
     if (input.value === "") {
 
-        const footer = document.getElementById("invalid-item");
-        const main = document.querySelector("main");
+        const footer = document.querySelector("footer");
 
-        footer.classList.add("failed");
+        newText.textContent = "Digite ao menos um item!";
+        newText.style.margin = 0;
 
-        console.log(main)
+        footer.appendChild(newText);
+
+        footer.classList.add("transitionError");
 
         setTimeout(() => {
 
-            footer.classList.remove("failed");
+            footer.classList.remove("transitionError");
 
         }, 2000);
 
+        footer.style.display = "flex";
+    }
 
-    } else {
+    else {
 
         const newItem = document.createElement("li");
         const newLabel = document.createElement("label");
         const newInput = document.createElement("input");
         const newIcon = document.createElement("i");
 
-        newInput.checked = false;
+        /* Regex para deixar a primeira letra maiúscula*/
+
+        const regex = /\D+/g;
+        const replace = input.value.match(regex);
+        const changes = replace.toString().toLowerCase();
+        const firstCharacter = changes.charAt(0);
+        const upperCharacter = firstCharacter.toString().toUpperCase();
+        const newString = changes.replace(changes.charAt(0), upperCharacter);
 
         newInput.type = "checkbox";
-        newItem.appendChild(newInput);
+        newInput.style.cursor = "pointer";
 
-        newLabel.textContent = input.value;
+        newLabel.appendChild(newInput)
+
+        newLabel.appendChild(document.createTextNode(newString));
+        newLabel.style.display = "flex";
+        newLabel.style.gap = "10px";
+        newLabel.style.alignItems = "center";
+        newLabel.style.cursor = "pointer";
+
         newItem.appendChild(newLabel);
 
-        newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02", "::before");
+        newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
         newItem.appendChild(newIcon);
 
-        const trash = newIcon;
-        const checkBox = newInput
+        currencyValue = newString;
 
-        trash.onclick = () => {
+        const validate = Objects(listObjects);
 
-            const itemError = document.getElementById("trash-item")
-            console.log(itemError)
+        if (validate) {
+            console.log(currencyValue)
+            const footer = document.querySelector("footer");
 
-            if (checkBox.checked === true) {
-                newItem.remove();
+            newText.textContent = "Este item já existe na lista!";
+            newText.style.margin = 0;
 
-                const tookItem = document.getElementById("took-item");
-                tookItem.classList.add("success");
+            footer.appendChild(newText);
+
+            footer.classList.add("transitionError");
+
+            setTimeout(() => {
+
+                footer.classList.remove("transitionError");
+
+            }, 2000);
+
+            footer.style.display = "flex";
+
+            return;
+
+        } else {
+
+            const ul = document.querySelector("ul");
+
+            ul.classList.remove("empty");
+            ul.classList.add("contains");
+
+            listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
+            let listHeight = listObjects.length - 1;
+
+            list.appendChild(newItem); //Adiciona o novo elemento a lista.
+
+            const footer = document.querySelector("footer");
+
+            newText.textContent = "Item adicionado com sucesso!";
+            newText.style.margin = 0;
+
+            footer.appendChild(newText);
+            footer.style.display = "flex";
+
+            footer.classList.add("transitionSuccess");
+
+            if (listHeight >= 2) {
+                let transition = listObjects[listHeight];
+                transition.classList.add("transparent");
 
                 setTimeout(() => {
+                    footer.classList.remove("transitionSuccess");
+                    transition.classList.remove("transparent");
+                }, 1000);
+            }
+            setTimeout(() => {
+                footer.classList.remove("transitionSuccess");
+            }, 2000);
 
-                    tookItem.classList.remove("success");
+            input.value = "";
 
-                }, 2000);
+            newIcon.onclick = () => {
 
-            } else {
+                if (newInput.checked == false) {
 
-                itemError.classList.add("failed");
-                const footer = document.getElementById("invalid-item");
+                    const footer = document.querySelector("footer");
 
-                setTimeout(() => {
+                    newText.textContent = "Selecione ao menos um item!";
+                    newText.style.margin = 0;
 
-                    itemError.classList.remove("failed");
+                    footer.appendChild(newText);
 
-                }, 2000);
+                    footer.classList.add("transitionError");
+
+                    setTimeout(() => {
+
+                        footer.classList.remove("transitionError");
+
+                    }, 2000);
+
+                    footer.style.display = "flex";
+
+                } else {
+
+                    const footer = document.querySelector("footer");
+
+                    newText.textContent = "Item removido com sucesso!";
+                    newText.style.margin = 0;
+
+                    footer.appendChild(newText);
+
+                    newItem.classList.add("transparent");
+
+                    footer.classList.add("transitionSuccess");
+
+                    setTimeout(() => {
+                        footer.classList.remove("transitionSuccess");
+                        newItem.classList.remove("transparent");
+                    }, 2000);
+
+                    const index = listObjects.indexOf(newItem);
+
+                    if (index > -1) {
+                        listObjects.splice(index, 1);
+                    }
+
+                    if (listObjects.length == 0) {
+                        ul.classList.add("empty");
+                    }
+
+                    let listHeight = listObjects.length - 1;
+
+                    if (listHeight >= 2) {
+                        let transition = listObjects[listHeight];
+                        transition.classList.add("transparent");
+
+                        setTimeout(() => {
+                            footer.classList.remove("transitionSuccess");
+                            transition.classList.remove("transparent");
+                        }, 1000);
+                    }
+
+                    footer.style.display = "flex";
+                    newItem.remove()
+                }
             }
         }
-
-        const footer = document.getElementById("success-item")
-
-        footer.classList.add("success")
-
-        setTimeout(() => {
-
-            footer.classList.remove("success");
-
-        }, 2000);
-
-        list.appendChild(newItem);
-        input.value = "";
     }
-
 };
-
-
-
-

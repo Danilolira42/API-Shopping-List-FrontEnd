@@ -83,13 +83,9 @@ button {
     align-items: center;
     gap: 5px;
     text-decoration: none;
-    color: #8a104f4d;
+    color: #CA3884;
     font-weight: 500;
     margin-bottom: 15px;
-}
-
-button.submit:hover {
-    background-color: #9b2d6a;
 }
 
 @media (min-width: 1200px) {
@@ -217,51 +213,87 @@ li input {
     margin-left: auto;
 }
 
-p i {
+i {
     font-size: 20px;
 }
 
-.invalid-item,
-.trash-item {
+footer {
     align-items: center;
     gap: 10px;
     border-radius: 12px;
-    padding: 8px;
-    width: 100%;
-    height: max-content;
+    padding: 12px;
+    min-height: 40px;
     color: white;
-    visibility: hidden;
-    opacity: 0;
+    text-align: center;
     transition: 1s ease;
+    margin: 0 auto;
+    margin-bottom: 10px;
+    position: fixed;
+    bottom: 20px;
 }
 
-p i {
-    color: white;
+/* Smartphones */
+@media (max-width: 767px) {
+    footer {
+        width: 376px;
+    }
 }
 
-.failed {
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    footer {
+        width: 627px;
+    }
+}
+
+/* Notebooks e PCs */
+@media (min-width: 1024px) {
+    footer {
+        width: 627px;
+    }
+}
+
+.transitionError {
     opacity: 1;
     visibility: visible;
+    transition: 1s ease;
     background-color: #C93847;
+    z-index: 1;
+    margin-bottom: 30px;
 }
 
-.success-item,
-.took-item {
-    align-items: center;
-    gap: 10px;
-    border-radius: 12px;
-    padding: 8px;
-    width: 100%;
-    height: max-content;
-    color: white;
-    visibility: hidden;
-    opacity: 0;
-    transition: 1s ease;
-}
-
-.success {
+.transitionSuccess {
     opacity: 1;
     visibility: visible;
-    background-color: #1ac770;
     transition: 1s ease;
+    background-color: #1cbd52d7;
+    z-index: 1;
+    margin-bottom: 30px;
+}
+
+.transparent {
+    filter: blur(2px);
+    opacity: 0.2;
+}
+
+.copyright {
+    visibility: visible;
+    opacity: 1;
+    width: max-content;
+    align-content: center;
+    background-color: #CA3884;
+    margin: 0;
+    bottom: 0;
+    padding: 0;
+    border-radius: 0;
+    width: 100%;
+    z-index: 0;
+}
+
+.copyright p {
+    text-align: center;
+    margin: 0 auto;
+    color: white;
+    padding: 0;
+    margin: 0;
 }
