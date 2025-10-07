@@ -4,6 +4,8 @@ const input = document.getElementById("input");
 const newText = document.createElement("p");
 let currencyValue = "";
 let listObjects = [];
+let allObjects = [];
+const selectAllInput = document.getElementById("selectAllInput");
 
 function Objects(listObjects) {
 
@@ -113,12 +115,41 @@ form.onsubmit = (event) => {
             listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
             let listHeight = listObjects.length - 1;
 
+            console.log(listHeight);
+
             list.appendChild(newItem); //Adiciona o novo elemento a lista.
+
+            for (let i = 0; i <= listHeight; i++) {
+                allObjects[i] = newInput;
+            }
 
             const footer = document.querySelector("footer");
 
             newText.textContent = "Item adicionado com sucesso!";
             newText.style.margin = 0;
+
+            const exportButton = document.getElementById("export");
+
+            const selectAll = document.getElementById("selectAll");
+
+            selectAll.style.visibility = "visible";
+
+            selectAllInput.onclick = () => {
+
+                if (selectAllInput.checked == true) {
+                    allObjects.forEach(element => {
+                        element.setAttribute("checked", true);
+                        console.log(element)
+                    });
+
+                } else if (selectAllInput.checked == false) {
+                    allObjects.forEach(element => {
+                        element.removeAttribute("checked")
+                        console.log(element)
+                    });
+
+                }
+            }
 
             footer.appendChild(newText);
             footer.style.display = "flex";
@@ -187,6 +218,9 @@ form.onsubmit = (event) => {
 
                     if (listObjects.length == 0) {
                         ul.classList.add("empty");
+                        exportButton.style.visibility = "hidden";
+                        selectAll.style.visibility = "hidden";
+                        selectAllInput.checked = false;
                     }
 
                     let listHeight = listObjects.length - 1;
