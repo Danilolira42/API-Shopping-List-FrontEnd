@@ -4,7 +4,6 @@ const input = document.getElementById("input");
 const newText = document.createElement("p");
 let currencyValue = "";
 let listObjects = [];
-let allObjects = [];
 const selectAllInput = document.getElementById("selectAllInput");
 
 function Objects(listObjects) {
@@ -54,6 +53,7 @@ form.onsubmit = (event) => {
         const newLabel = document.createElement("label");
         const newInput = document.createElement("input");
         const newIcon = document.createElement("i");
+        const noContent = document.createElement("p");
 
         /* Regex para deixar a primeira letra maiúscula*/
 
@@ -117,11 +117,7 @@ form.onsubmit = (event) => {
 
             console.log(listHeight);
 
-            list.appendChild(newItem); //Adiciona o novo elemento a lista.
-
-            for (let i = 0; i <= listHeight; i++) {
-                allObjects[i] = newInput;
-            }
+            list.appendChild(newItem); //Adiciona o novo elemento à lista.
 
             const footer = document.querySelector("footer");
 
@@ -130,25 +126,26 @@ form.onsubmit = (event) => {
 
             const exportButton = document.getElementById("export");
 
+            exportButton.style.visibility = "visible";
+
             const selectAll = document.getElementById("selectAll");
 
             selectAll.style.visibility = "visible";
 
+            const noContent = document.getElementById("nocontent");
+
+            noContent.style.visibility = "hidden";
+
+            console.log(noContent)
+
+            //Adiciona checked = true em todos os checkBoxes.
             selectAllInput.onclick = () => {
+                const allObjects = document.querySelectorAll('input[type="checkbox"]')
 
-                if (selectAllInput.checked == true) {
-                    allObjects.forEach(element => {
-                        element.setAttribute("checked", true);
-                        console.log(element)
-                    });
-
-                } else if (selectAllInput.checked == false) {
-                    allObjects.forEach(element => {
-                        element.removeAttribute("checked")
-                        console.log(element)
-                    });
-
-                }
+                allObjects.forEach(element => {
+                    element.checked = selectAllInput.checked
+                    console.log(element)
+                })
             }
 
             footer.appendChild(newText);
@@ -167,10 +164,11 @@ form.onsubmit = (event) => {
             }
             setTimeout(() => {
                 footer.classList.remove("transitionSuccess");
-            }, 2000);
+            }, 1000);
 
             input.value = "";
 
+            //Function para adicionar os itens.
             newIcon.onclick = () => {
 
                 if (newInput.checked == false) {
@@ -188,7 +186,7 @@ form.onsubmit = (event) => {
 
                         footer.classList.remove("transitionError");
 
-                    }, 2000);
+                    }, 1000);
 
                     footer.style.display = "flex";
 
@@ -208,7 +206,7 @@ form.onsubmit = (event) => {
                     setTimeout(() => {
                         footer.classList.remove("transitionSuccess");
                         newItem.classList.remove("transparent");
-                    }, 2000);
+                    }, 1000);
 
                     const index = listObjects.indexOf(newItem);
 
@@ -216,11 +214,15 @@ form.onsubmit = (event) => {
                         listObjects.splice(index, 1);
                     }
 
+                    //Validação para quando não há elementos na lista.
                     if (listObjects.length == 0) {
+
                         ul.classList.add("empty");
                         exportButton.style.visibility = "hidden";
                         selectAll.style.visibility = "hidden";
                         selectAllInput.checked = false;
+                        noContent.style.visibility = "visible";
+
                     }
 
                     let listHeight = listObjects.length - 1;
@@ -232,7 +234,7 @@ form.onsubmit = (event) => {
                         setTimeout(() => {
                             footer.classList.remove("transitionSuccess");
                             transition.classList.remove("transparent");
-                        }, 1000);
+                        }, 500);
                     }
 
                     footer.style.display = "flex";

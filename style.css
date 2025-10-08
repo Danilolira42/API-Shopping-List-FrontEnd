@@ -39,6 +39,7 @@ main {
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
 }
 
 html,
@@ -190,6 +191,36 @@ ul.empty {
     transition: 2s ease;
 }
 
+.nocontent {
+    color: white;
+    position: absolute;
+    left: 50%;
+    top: 45%;
+    position: fixed;
+    margin: 10px auto;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    background-color: #f8bcdb;
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    width: 627px;
+}
+
+@media (max-width: 768px) {
+    .nocontent {
+        width: 400px;
+        top: 40%;
+    }
+}
+
+@media (min-width: 1880px) {
+    .nocontent {
+        top: 40%;
+    }
+}
+
+
 li {
     padding: 20px;
     padding-left: 0;
@@ -272,7 +303,7 @@ footer {
 .transitionError {
     opacity: 1;
     visibility: visible;
-    transition: 1s ease;
+    transition: .5s ease;
     background-color: #C93847;
     z-index: 1;
     margin-bottom: 30px;
@@ -281,7 +312,7 @@ footer {
 .transitionSuccess {
     opacity: 1;
     visibility: visible;
-    transition: 1s ease;
+    transition: .5s ease;
     background-color: #1cbd52d7;
     z-index: 1;
     margin-bottom: 30px;
