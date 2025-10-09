@@ -1,0 +1,148 @@
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+}
+
+body {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.spiky-div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 40%;
+    height: 100%;
+
+    background-image: url("./sources/Lista de Compras.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    color: white;
+    padding: 50px;
+    text-align: center;
+
+    clip-path: polygon(0% 0%, 100% 10%, 100% 100%, 40% 40%, 100% 100%, 70% 100%, 0% 90%, 0% 0%);
+
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    z-index: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    width: 100%;
+    padding: 20px;
+    z-index: 1;
+}
+
+
+.login-box {
+    background: #fff;
+    border-radius: 12px;
+    padding: 40px 50px;
+    max-width: 400px;
+    width: 100%;
+    box-shadow: 2px 8px 20px rgba(0, 0, 0, 0.35);
+    text-align: center;
+    margin-right: 15%;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 30px;
+}
+
+.input-group {
+    text-align: left;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    color: #555;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: 0.3s;
+    outline: none;
+}
+
+input:focus {
+    border-color: #ff6cb8;
+    box-shadow: 0 0 0 3px rgba(255, 205, 231, 0.842);
+}
+
+.login-button {
+    width: 100%;
+    padding: 12px;
+    background: #ca3884;
+    color: white;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+
+.login-button:hover {
+    background-color: #ca076cbd;
+    outline: none;
+}
+
+.forgot {
+    display: block;
+    margin-top: 15px;
+    color: #ca3884;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.forgot:hover {
+    text-decoration: underline;
+}
+
+.register {
+    margin-top: 25px;
+    font-size: 14px;
+    color: #555;
+}
+
+.register a {
+    color: #ca3884;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.register a:hover {
+    text-decoration: underline;
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+    .login-box {
+        padding: 30px 25px;
+    }
+}

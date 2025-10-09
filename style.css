@@ -63,6 +63,14 @@ nav {
     justify-items: left;
 }
 
+nav a,
+a:visited,
+a:active,
+a:focus,
+a:hover {
+    text-decoration: none;
+}
+
 button {
     -webkit-appearance: none;
     /* For WebKit browsers */
@@ -195,10 +203,9 @@ ul.empty {
     color: white;
     position: absolute;
     left: 50%;
-    top: 45%;
-    position: fixed;
+    top: 50%;
+    transform: translate(-50%, 220%);
     margin: 10px auto;
-    transform: translateX(-50%);
     white-space: nowrap;
     background-color: #f8bcdb;
     border-radius: 8px;
@@ -207,16 +214,61 @@ ul.empty {
     width: 627px;
 }
 
-@media (max-width: 768px) {
+/* Celulares pequenos */
+@media (max-width: 480px) {
     .nocontent {
-        width: 400px;
-        top: 40%;
+        width: 376px;
+        font-size: 14px;
+        padding: 10px;
     }
 }
 
-@media (min-width: 1880px) {
+/* Celulares médios */
+@media (min-width: 481px) and (max-width: 767px) {
     .nocontent {
-        top: 40%;
+        width: 360px;
+        font-size: 15px;
+        padding: 11px;
+    }
+}
+
+/* Tablets */
+@media (min-width: 768px) and (max-width: 1023px) {
+    .nocontent {
+        width: 627px;
+        font-size: 16px;
+    }
+}
+
+/* Laptops pequenos */
+@media (min-width: 1024px) and (max-width: 1365px) {
+    .nocontent {
+        width: 627px;
+        font-size: 17px;
+    }
+}
+
+/* Monitores padrão */
+@media (min-width: 1366px) and (max-width: 1879px) {
+    .nocontent {
+        width: 627px;
+        font-size: 18px;
+    }
+}
+
+/* Monitores grandes */
+@media (min-width: 1880px) and (max-width: 2559px) {
+    .nocontent {
+        width: 627px;
+        font-size: 20px;
+    }
+}
+
+/* Telas 2K ou 4K */
+@media (min-width: 2560px) {
+    .nocontent {
+        width: 627px;
+        font-size: 22px;
     }
 }
 
@@ -238,6 +290,13 @@ li input {
     transform: scale(1.3);
 }
 
+.allElements {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    opacity: 1;
+}
+
 #selectAll {
     display: flex;
     gap: 10px;
@@ -249,6 +308,11 @@ li input {
     transform: scale(1.3);
     display: flex;
     margin-left: 20px;
+}
+
+#allTrash {
+    visibility: hidden;
+    margin-right: 20px;
 }
 
 .custom-checkbox input {
@@ -306,7 +370,7 @@ footer {
     transition: .5s ease;
     background-color: #C93847;
     z-index: 1;
-    margin-bottom: 30px;
+    margin-bottom: 3.5em;
 }
 
 .transitionSuccess {
@@ -315,7 +379,7 @@ footer {
     transition: .5s ease;
     background-color: #1cbd52d7;
     z-index: 1;
-    margin-bottom: 30px;
+    margin-bottom: 3.5em;
 }
 
 .transparent {

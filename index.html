@@ -36,19 +36,21 @@
             </h1>
         </header>
         <nav>
-            <button name="back">
-                </span>
+            <a href="http://127.0.0.1:5500/home.html">
+                <button name="back">
+                    </span>
 
-                <i class="hgi hgi-stroke hgi-arrow-left-02"></i>
+                    <i class="hgi hgi-stroke hgi-arrow-left-02"></i>
 
-                Voltar
+                    Voltar
 
-                </span>
-            </button>
-
+                    </span>
+                </button>
+            </a>
             <h2 alt="Título-secundário">Compras da semana</h2>
 
         </nav>
+
         <form>
 
             <input id="input" type="text" placeholder="Adicione um novo item" alt="Entrada de dados">
@@ -56,11 +58,22 @@
 
         </form>
 
-        <label name="All" id="selectAll">
-            <input type="checkbox" name="All" id="selectAllInput" class="selectAll">
-            <span>Todos</span>
-            </input>
-        </label>
+        <div class="allElements" id="allElements">
+            <label name="All" id="selectAll">
+
+                <input type="checkbox" name="All" id="selectAllInput" class="selectAll">
+
+                <span>
+
+                    Selecionar todos
+
+                </span>
+
+                </input>
+            </label>
+
+            <i class="hgi hgi-stroke hgi-delete-02" id="allTrash"></i>
+        </div>
 
         <ul alt="Lista de compras">
             <label>
@@ -68,7 +81,7 @@
             </label>
         </ul>
 
-        <p class="nocontent" id="nocontent">Sem itens adicionados!</p>
+        <p class="nocontent" id="nocontent">Sem itens adicionados</p>
 
         <button id="export" type="button" class="export" alt="Exportar">Exportar</button>
 
