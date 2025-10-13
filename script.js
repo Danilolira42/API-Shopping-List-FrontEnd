@@ -6,6 +6,7 @@ let currencyValue = "";
 let listObjects = [];
 const selectAllInput = document.getElementById("selectAllInput");
 const allElements = document.getElementById("allElements");
+let isOpenEvent = false;
 
 //Validação para ver se este item já existe na lista de compras.
 function Validate(listObjects) {
@@ -16,8 +17,34 @@ function Validate(listObjects) {
     return validate;
 }
 
+//Validação se input está com evento aberto. 
+function isOpen(isOpenEvent) {
+    return isOpenEvent;
+}
+
 form.onsubmit = (event) => {
     event.preventDefault();
+
+    if (isOpen(isOpenEvent) == true) {
+
+        const footer = document.querySelector("footer");
+
+        newText.textContent = "Termine de salvar o item antes de adicionar o próximo!";
+        newText.style.margin = 0;
+
+        footer.appendChild(newText);
+
+        footer.classList.add("transitionError");
+
+        setTimeout(() => {
+
+            footer.classList.remove("transitionError");
+
+        }, 2000);
+
+        footer.style.display = "flex";
+        return;
+    }
 
     //Validação de entrada de dados!
 
@@ -46,38 +73,140 @@ form.onsubmit = (event) => {
         const newItem = document.createElement("li");
         const newLabel = document.createElement("label");
         const newInput = document.createElement("input");
-        const newIcon = document.createElement("i");
+        const iconsDiv = document.createElement("div");
+        const newIconTrash = document.createElement("i");
+        const newIconPencil = document.createElement("i");
 
         /* Regex para deixar a primeira letra maiúscula*/
 
         const regex = /\D+/g;
-        const replace = input.value.match(regex);
+        const regexNumber = /\d+/g;
+        const replace = String(input.value.match(regex)).trim();
         const changes = replace.toString().toLowerCase();
         const firstCharacter = changes.charAt(0);
         const upperCharacter = firstCharacter.toString().toUpperCase();
-        const newString = changes.replace(changes.charAt(0), upperCharacter);
+
+        if (input.value.match(regexNumber) == null) {
+            const footer = document.querySelector("footer");
+
+            newText.textContent = "Digite uma quantidade!";
+            newText.style.margin = 0;
+
+            footer.appendChild(newText);
+
+            footer.classList.add("transitionError");
+
+            setTimeout(() => {
+
+                footer.classList.remove("transitionError");
+
+            }, 2000);
+
+            footer.style.display = "flex";
+            return;
+        }
+        let newString = input.value.match(regexNumber) + " " + changes.replace(changes.charAt(0), upperCharacter);
 
         newInput.type = "checkbox";
         newInput.style.cursor = "pointer";
 
         newLabel.appendChild(newInput)
 
-        newLabel.appendChild(document.createTextNode(newString));
-        newLabel.style.display = "flex";
-        newLabel.style.gap = "10px";
-        newLabel.style.alignItems = "center";
-        newLabel.style.cursor = "pointer";
+        let textNode = document.createTextNode(newString);
+
+        newLabel.appendChild(textNode);
+        newLabel.classList.add("newLabel");
 
         newItem.appendChild(newLabel);
 
-        newIcon.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
-        newItem.appendChild(newIcon);
+        newIconPencil.classList.add("bi", "bi-pencil");
+
+        //Adiciona input para editar o que foi digitado anteriormente.
+        newIconPencil.onclick = (event) => {
+
+            isOpenEvent = event.isTrusted;
+
+            isOpen(isOpenEvent);
+
+            let newInputPencil = document.createElement("input");
+            newInputPencil.classList.add("newInputPencil");
+
+            newInputPencil.value = textNode.textContent;
+
+            newLabel.removeChild(textNode);
+            console.log(newLabel);
+
+            const save = document.createElement("button");
+            save.setAttribute("alt", "Botão Salvar");
+            save.textContent = "Salvar";
+            save.classList.add("save");
+
+            newLabel.append(newInputPencil, save);
+
+            save.onclick = (event) => {
+                event.preventDefault();
+
+                isOpenEvent = false;
+
+                isOpen(isOpenEvent);
+                console.log(textNode)
+
+                if (newInputPencil.value == "") {
+
+                    console.log("Oi")
+
+                    const footer = document.querySelector("footer");
+
+                    newText.textContent = "Digite um valor antes de salvar!";
+                    newText.style.margin = 0;
+
+                    footer.appendChild(newText);
+
+                    footer.classList.add("transitionError");
+
+                    setTimeout(() => {
+
+                        footer.classList.remove("transitionError");
+
+                    }, 2000);
+
+                    footer.style.display = "flex";
+
+                    return;
+
+                }
+
+                const regex = /\D+/g;
+                const replace = newInputPencil.value.match(regex);
+                const changes = replace.toString().toLowerCase();
+                const firstCharacter = changes.charAt(0);
+                const upperCharacter = firstCharacter.toString().toUpperCase();
+                let newString = changes.replace(changes.charAt(0), upperCharacter);
+
+                newLabel.removeChild(newInputPencil);
+                newLabel.removeChild(save);
+
+                textNode = document.createTextNode(newString);
+
+                newLabel.appendChild(textNode);
+
+                newLabel.appendChild(textNode);
+            }
+        }
+
+        newIconTrash.classList.add("hgi", "hgi-stroke", "hgi-delete-02");
+
+        iconsDiv.classList.add("divIcons");
+        iconsDiv.append(newIconPencil, newIconTrash);
+
+        newItem.append(iconsDiv);
 
         currencyValue = newString;
 
         const validate = Validate(listObjects);
 
         if (validate) {
+
             const footer = document.querySelector("footer");
 
             newText.textContent = "Este item já existe na lista!";
@@ -107,6 +236,32 @@ form.onsubmit = (event) => {
             listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
             let listHeight = listObjects.length - 1;
 
+            //POST
+            async function Post(url, body) {
+                try {
+                    const response = await fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(body)
+                    })
+                    if (!response.ok) throw new Error("Erro na requisição");
+
+                    const data = await response.json();
+                    return data;
+                } catch (error) {
+                    console.error("Erro na requisição", error)
+                }
+            }
+
+            const newProduct = {
+                productID: 0,
+                productName: newItem.textContent
+            }
+
+            const created = Post("https://localhost:7172/ShoppingProducts/AddProduct", newProduct)
+
             list.appendChild(newItem); //Adiciona o novo elemento à lista.
 
             //Adiciona o footer de item adicionado.
@@ -114,6 +269,36 @@ form.onsubmit = (event) => {
 
             newText.textContent = "Item adicionado com sucesso!";
             newText.style.margin = 0;
+
+            setTimeout(() => {
+
+                //GET
+                async function Get(url) {
+                    try {
+
+                        const response = await fetch(url);
+
+                        if (!response.ok) throw new Error("Erro ao buscar os dados!");
+
+                        const data = await response.json();
+
+                        return data;
+                    } catch (error) {
+
+                        console.error("Erro ao solicitar os dados: ", error);
+                    }
+                }
+
+                Get("https://localhost:7172/ShoppingProducts").then(response => {
+                    const products = response.map(element => {
+                        return {
+                            productID: element.productID,
+                            productName: element.productName
+                        }
+                    });
+
+                })
+            }, 3000)
 
             const exportButton = document.getElementById("export");
 
@@ -135,7 +320,7 @@ form.onsubmit = (event) => {
 
                     const footer = document.querySelector("footer");
 
-                    newText.textContent = "Selecione a opção de Todos!";
+                    newText.textContent = "Clique em Selecionar todos!";
                     newText.style.margin = 0;
 
                     footer.appendChild(newText);
@@ -147,8 +332,9 @@ form.onsubmit = (event) => {
                         footer.classList.remove("transitionError");
 
                     }, 1000)
+
                 } else {
-                    console.log(listObjects.length)
+
                     listObjects.forEach(element => {
 
                         element.remove()
@@ -226,8 +412,8 @@ form.onsubmit = (event) => {
 
             input.value = "";
 
-            //Function para adicionar os itens na lista.
-            newIcon.onclick = () => {
+            //Function para remover itens da lista.
+            newIconTrash.onclick = () => {
 
                 if (newInput.checked == false) {
 
