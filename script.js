@@ -86,6 +86,8 @@ form.onsubmit = (event) => {
         const firstCharacter = changes.charAt(0);
         const upperCharacter = firstCharacter.toString().toUpperCase();
 
+        //Validação para ver se o usuário digita a quantidade.
+
         if (input.value.match(regexNumber) == null) {
             const footer = document.querySelector("footer");
 
@@ -152,8 +154,6 @@ form.onsubmit = (event) => {
                 console.log(textNode)
 
                 if (newInputPencil.value == "") {
-
-                    console.log("Oi")
 
                     const footer = document.querySelector("footer");
 
