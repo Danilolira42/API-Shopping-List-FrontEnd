@@ -296,7 +296,6 @@ form.onsubmit = (event) => {
                             productName: element.productName
                         }
                     });
-
                 })
             }, 3000)
 
