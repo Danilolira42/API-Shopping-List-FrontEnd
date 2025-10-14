@@ -44,7 +44,6 @@ body {
     z-index: 1;
 }
 
-
 .login-box {
     background: #fff;
     border-radius: 12px;
@@ -87,11 +86,15 @@ input {
     font-size: 15px;
     transition: 0.3s;
     outline: none;
+    border: solid 2px transparent;
 }
 
-input:focus {
-    border-color: #ff6cb8;
-    box-shadow: 0 0 0 3px rgba(255, 205, 231, 0.842);
+input:focus,
+input:hover {
+    caret-color: #CA3884;
+    border: solid 2px;
+    border-color: #CA3884;
+    outline: none;
 }
 
 .login-button {
@@ -145,4 +148,26 @@ input:focus {
     .login-box {
         padding: 30px 25px;
     }
+}
+
+.Email {
+    align-items: center;
+    border-radius: 8px;
+    padding: 12px;
+    color: white;
+    text-align: center;
+    transition: 1s ease;
+    font-family: "Inter", sans-serif;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.invalidEmail {
+    opacity: 1;
+    visibility: visible;
+    transition: .5s ease;
+    background-color: #C93847;
+    color: white;
+    z-index: 1;
+    font-family: "Inter", sans-serif;
 }

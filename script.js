@@ -22,6 +22,8 @@ function isOpen(isOpenEvent) {
     return isOpenEvent;
 }
 
+
+//Envio do formulário
 form.onsubmit = (event) => {
     event.preventDefault();
 
@@ -29,7 +31,7 @@ form.onsubmit = (event) => {
 
         const footer = document.querySelector("footer");
 
-        newText.textContent = "Termine de salvar o item antes de adicionar o próximo!";
+        newText.textContent = "Salve antes de adicionar outro item!";
         newText.style.margin = 0;
 
         footer.appendChild(newText);
@@ -47,12 +49,30 @@ form.onsubmit = (event) => {
     }
 
     //Validação de entrada de dados!
-
     if (input.value === "") {
 
         const footer = document.querySelector("footer");
 
-        newText.textContent = "Digite ao menos um item!";
+        newText.textContent = "Digite um produto válido!";
+        newText.style.margin = 0;
+
+        footer.appendChild(newText);
+
+        footer.classList.add("transitionError");
+
+        setTimeout(() => {
+
+            footer.classList.remove("transitionError");
+
+        }, 2000);
+
+        footer.style.display = "flex";
+
+    } else if (input.value.length > 15) {
+
+        const footer = document.querySelector("footer");
+
+        newText.textContent = "Digite apenas um produto!";
         newText.style.margin = 0;
 
         footer.appendChild(newText);
@@ -91,7 +111,7 @@ form.onsubmit = (event) => {
         if (input.value.match(regexNumber) == null) {
             const footer = document.querySelector("footer");
 
-            newText.textContent = "Digite uma quantidade!";
+            newText.textContent = "Digite uma quantidade em número!";
             newText.style.margin = 0;
 
             footer.appendChild(newText);
@@ -107,7 +127,8 @@ form.onsubmit = (event) => {
             footer.style.display = "flex";
             return;
         }
-        let newString = input.value.match(regexNumber) + " " + changes.replace(changes.charAt(0), upperCharacter);
+        
+        let newString = String(input.value.match(regexNumber) + " " + changes.replace(changes.charAt(0), upperCharacter));
 
         newInput.type = "checkbox";
         newInput.style.cursor = "pointer";
@@ -151,7 +172,6 @@ form.onsubmit = (event) => {
                 isOpenEvent = false;
 
                 isOpen(isOpenEvent);
-                console.log(textNode)
 
                 if (newInputPencil.value == "") {
 
@@ -173,15 +193,38 @@ form.onsubmit = (event) => {
                     footer.style.display = "flex";
 
                     return;
-
                 }
 
                 const regex = /\D+/g;
-                const replace = newInputPencil.value.match(regex);
+                const regexNumber = /\d+/g;
+                const replace = String(newInputPencil.value.match(regex)).trim();
                 const changes = replace.toString().toLowerCase();
                 const firstCharacter = changes.charAt(0);
                 const upperCharacter = firstCharacter.toString().toUpperCase();
-                let newString = changes.replace(changes.charAt(0), upperCharacter);
+
+                //Validação para ver se o usuário digita a quantidade.
+
+                if (newInputPencil.value.match(regexNumber) == null) {
+                    const footer = document.querySelector("footer");
+
+                    newText.textContent = "Digite uma quantidade em número!";
+                    newText.style.margin = 0;
+
+                    footer.appendChild(newText);
+
+                    footer.classList.add("transitionError");
+
+                    setTimeout(() => {
+
+                        footer.classList.remove("transitionError");
+
+                    }, 2000);
+
+                    footer.style.display = "flex";
+                    return;
+                }
+
+                let newString = newInputPencil.value.match(regexNumber) + " " + changes.replace(changes.charAt(0), upperCharacter);
 
                 newLabel.removeChild(newInputPencil);
                 newLabel.removeChild(save);
@@ -191,6 +234,19 @@ form.onsubmit = (event) => {
                 newLabel.appendChild(textNode);
 
                 newLabel.appendChild(textNode);
+
+                const footer = document.querySelector("footer");
+
+                newText.textContent = "Item(s) salvo(s) com sucesso!";
+                newText.style.margin = 0;
+
+                footer.appendChild(newText);
+
+                footer.classList.add("transitionSuccess");
+
+                setTimeout(() => {
+                    footer.classList.remove("transitionSuccess");
+                }, 1000);
             }
         }
 
@@ -340,7 +396,7 @@ form.onsubmit = (event) => {
 
                         const footer = document.querySelector("footer");
 
-                        newText.textContent = "Item removido com sucesso!";
+                        newText.textContent = "Item(s) removido(s) com sucesso!";
                         newText.style.margin = 0;
 
                         footer.appendChild(newText);
@@ -352,10 +408,11 @@ form.onsubmit = (event) => {
                         setTimeout(() => {
                             footer.classList.remove("transitionSuccess");
                             ul.classList.add("empty");
-                        }, 500);
+                        }, 800);
 
                         //Reseta os itens da lista.
                         const index = listObjects.indexOf(element);
+                        isOpenEvent = false;
 
                         console.log(index)
 

@@ -350,6 +350,7 @@ li input {
     cursor: pointer;
 }
 
+/* Estilização para input de alteração de produto.*/
 .newInputPencil {
     font-size: 12px;
     width: 10em;
@@ -359,6 +360,7 @@ li input {
     margin-left: 13px;
     align-items: center;
     justify-content: center;
+    padding: 0.5px;
 }
 
 .newInputPencil:focus,
@@ -367,7 +369,7 @@ li input {
     border: 2px solid #CA3884;
     border-radius: 5px;
     box-shadow: none;
-    
+
 }
 
 .save {
