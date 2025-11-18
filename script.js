@@ -22,7 +22,6 @@ function isOpen(isOpenEvent) {
     return isOpenEvent;
 }
 
-
 //Envio do formulário
 form.onsubmit = (event) => {
     event.preventDefault();
@@ -68,7 +67,7 @@ form.onsubmit = (event) => {
 
         footer.style.display = "flex";
 
-    } else if (input.value.length > 15) {
+    } else if (input.value.length > 18) {
 
         const footer = document.querySelector("footer");
 
@@ -284,14 +283,6 @@ form.onsubmit = (event) => {
 
         } else {
 
-            const ul = document.querySelector("ul");
-
-            ul.classList.remove("empty");
-            ul.classList.add("contains");
-
-            listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
-            let listHeight = listObjects.length - 1;
-
             //POST
             async function Post(url, body) {
                 try {
@@ -304,10 +295,56 @@ form.onsubmit = (event) => {
                     })
                     if (!response.ok) throw new Error("Erro na requisição");
 
-                    const data = await response.json();
+                const data = await response.json();
+
+                 const ul = document.querySelector("ul");
+
+                 ul.classList.remove("empty");
+                 ul.classList.add("contains");
+
+                 listObjects.push(newItem); //Adiciona o novo elemento na Lista de Arrays.
+                 let listHeight = listObjects.length - 1;
+                
+                //Adiciona o footer de item adicionado.
+                const footer = document.querySelector("footer");
+
+                newText.textContent = "Item adicionado com sucesso!";
+                newText.style.margin = 0;
+
+                footer.appendChild(newText);
+
+                footer.classList.add("transitionSuccess");
+
+                footer.style.display = "flex";;
+
+                setTimeout(() => {
+
+                    footer.classList.remove("transitionSuccess");
+                
+                }, 2000);
+                    
                     return data;
+                    
                 } catch (error) {
-                    console.error("Erro na requisição", error)
+               
+               const footer = document.querySelector("footer");
+
+                newText.textContent = "Não foi possível adicionar o item!";
+                newText.style.margin = 0;
+
+                footer.appendChild(newText);
+
+                footer.classList.add("transitionError");
+
+                setTimeout(() => {
+
+                footer.classList.remove("transitionError");
+
+                }, 2000);
+
+                footer.style.display = "flex";
+
+                    return;
                 }
             }
 
@@ -316,17 +353,11 @@ form.onsubmit = (event) => {
                 productName: newItem.textContent
             }
 
-            const created = Post("https://localhost:7172/ShoppingProducts/AddProduct", newProduct)
+            const created = Post("https://localhost:7172/api/Products/RegisterNewProduct", newProduct)
+
+            };
 
             list.appendChild(newItem); //Adiciona o novo elemento à lista.
-
-            //Adiciona o footer de item adicionado.
-            const footer = document.querySelector("footer");
-
-            newText.textContent = "Item adicionado com sucesso!";
-            newText.style.margin = 0;
-
-            setTimeout(() => {
 
                 //GET
                 async function Get(url) {
@@ -345,15 +376,14 @@ form.onsubmit = (event) => {
                     }
                 }
 
-                Get("https://localhost:7172/ShoppingProducts").then(response => {
+                Get("https://localhost:7172/api/Products/GetAllProducts").then(response => {
                     const products = response.map(element => {
                         return {
                             productID: element.productID,
                             productName: element.productName
                         }
                     });
-                })
-            }, 3000)
+                });
 
             const exportButton = document.getElementById("export");
 
@@ -545,4 +575,4 @@ form.onsubmit = (event) => {
             }
         }
     }
-};
+

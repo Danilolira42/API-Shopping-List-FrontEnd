@@ -49,6 +49,7 @@ body {
     height: 100%;
     display: flex;
     flex-direction: column;
+    margin-bottom: 25vh;
 }
 
 header {
@@ -222,7 +223,7 @@ ul.empty {
 
 /* Celulares pequenos */
 @media (max-width: 480px) {
-    .nocontent {
+    .no-content {
         width: 376px;
         font-size: 14px;
         padding: 10px;
@@ -231,7 +232,7 @@ ul.empty {
 
 /* Celulares médios */
 @media (min-width: 481px) and (max-width: 767px) {
-    .nocontent {
+    .no-content {
         width: 360px;
         font-size: 15px;
         padding: 11px;
@@ -240,7 +241,7 @@ ul.empty {
 
 /* Tablets */
 @media (min-width: 768px) and (max-width: 1023px) {
-    .nocontent {
+    .no-content {
         width: 627px;
         font-size: 16px;
     }
@@ -248,7 +249,7 @@ ul.empty {
 
 /* Laptops pequenos */
 @media (min-width: 1024px) and (max-width: 1365px) {
-    .nocontent {
+    .no-content {
         width: 627px;
         font-size: 17px;
     }
@@ -256,7 +257,7 @@ ul.empty {
 
 /* Monitores padrão */
 @media (min-width: 1366px) and (max-width: 1879px) {
-    .nocontent {
+    .no-content {
         width: 627px;
         font-size: 18px;
     }
@@ -264,7 +265,7 @@ ul.empty {
 
 /* Monitores grandes */
 @media (min-width: 1880px) and (max-width: 2559px) {
-    .nocontent {
+    .no-content {
         width: 627px;
         font-size: 20px;
     }
@@ -272,7 +273,7 @@ ul.empty {
 
 /* Telas 2K ou 4K */
 @media (min-width: 2560px) {
-    .nocontent {
+    .no-content {
         width: 627px;
         font-size: 22px;
     }
